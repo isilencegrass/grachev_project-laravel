@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\RegistrationController;
-use App\http\Controller\LoginController;
+use App\http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +24,7 @@ Route::post('/registration/check', [RegistrationController::class, 'check'])->na
 
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login/check', [LoginController::class, 'check'])->name('login.check');
+
+
+
+

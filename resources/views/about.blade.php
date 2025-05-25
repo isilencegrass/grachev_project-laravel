@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Про нас')
+@section('title', 'О нас')
 
 @section('main_content')
 <div class="container py-5">
