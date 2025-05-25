@@ -22,13 +22,11 @@ class RegistrationController extends Controller
             'avatar' => 'nullable|image|mimes:jpg,png|max:2048',
         ]);
 
-        // Сохраняем аватар, если есть
         $avatarPath = null;
         if ($request->hasFile('avatar')) {
             $avatarPath = $request->file('avatar')->store('avatars', 'public');
         }
 
-        // Создаём пользователя
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
@@ -36,7 +34,6 @@ class RegistrationController extends Controller
             'avatar' => $avatarPath,
         ]);
 
-        // Входим сразу после регистрации
         auth()->login($user);
 
         return redirect()->route('profile')->with('success', 'Регистрация прошла успешно!');
