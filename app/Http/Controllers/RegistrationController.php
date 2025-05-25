@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
@@ -20,6 +22,23 @@ class RegistrationController extends Controller
             'avatar' => 'nullable|image|mimes:jpg,png|max:2048',
         ]);
 
-        return back()->with('success', 'Регистрация прошла успешно!');
+        // Сохраняем аватар, если есть
+        $avatarPath = null;
+        if ($request->hasFile('avatar')) {
+            $avatarPath = $request->file('avatar')->store('avatars', 'public');
+        }
+
+        // Создаём пользователя
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'avatar' => $avatarPath,
+        ]);
+
+        // Входим сразу после регистрации
+        auth()->login($user);
+
+        return redirect()->route('profile')->with('success', 'Регистрация прошла успешно!');
     }
 }

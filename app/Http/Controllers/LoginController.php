@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -18,10 +19,11 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+        if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']])) {
+            $request->session()->regenerate();
+            return redirect()->route('profile')->with('success', 'Вход выполнен!');
+        }
 
-        // ЛОГИКА ПРОВЕРКИ ПОЛЬЗОВАТЕЛЕЙ ЗДЕСЬ
-
-
-        return back()->with('success', 'Вход выполнен!');
+        return back()->with('error', 'Неверный email или пароль')->withInput();
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\RegistrationController;
@@ -25,6 +26,15 @@ Route::post('/registration/check', [RegistrationController::class, 'check'])->na
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login/check', [LoginController::class, 'check'])->name('login.check');
 
+Route::get('/profile', function () {
+    return view('profile');
+})->middleware('auth')->name('profile');
 
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+})->name('logout');
 
 

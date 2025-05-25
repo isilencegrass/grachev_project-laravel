@@ -19,23 +19,52 @@
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="/" class="nav-link px-2 link-light">Home</a></li>
                     <li><a href="about" class="nav-link px-2 link-light">About us</a>
-                    <!-- <li><a href="#" class="nav-link px-2 link-light">Customers</a></li> -->
-                    <!-- <li><a href="#" class="nav-link px-2 link-light">Products</a></li> -->
                 </ul>
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                     <input type="search" class="form-control bg-secondary text-white border-0" placeholder="Search..." aria-label="Search">
                 </form>
                 <div class="dropdown text-end">
-                    <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle border border-light">
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark text-small">
-                        <li><a class="dropdown-item" href="login">New project...</a></li>
-                        <!-- <li><a class="dropdown-item" href="#">Settings</a></li> -->
-                        <li><a class="dropdown-item" href="registration">Profile</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
-                    </ul>
+                    @auth
+                        <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('images/default-avatar.png') }}"
+                                 alt="{{ Auth::user()->name }}"
+                                 width="32"
+                                 height="32"
+                                 class="rounded-circle border border-light">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('profile') }}">
+                                    Профиль
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button class="dropdown-item" type="submit">
+                                        Выйти
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    @else
+                        <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Гость
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('login') }}">
+                                    Войти
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('registration') }}">
+                                    Регистрация
+                                </a>
+                            </li>
+                        </ul>
+                    @endauth
                 </div>
             </div>
         </div>
