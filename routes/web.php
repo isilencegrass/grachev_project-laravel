@@ -1,10 +1,14 @@
 <?php
 
+use Illuminate\Http\Request;
+use App\Models\Posts;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\RegistrationController;
 use App\http\Controllers\LoginController;
+use App\Http\Controllers\PostsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +31,23 @@ Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login/check', [LoginController::class, 'check'])->name('login.check');
 
 Route::get('/profile', function () {
-    return view('profile');
+    $posts = Posts::where('user_id', auth()->id())->latest()->get();
+    return view('profile', compact('posts'));
 })->middleware('auth')->name('profile');
+
+Route::post('/profile/avatar', function(Request $request) {
+    $request->validate([
+        'avatar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+    $user = auth()->user();
+    if ($request->hasFile('avatar')) {
+        $path = $request->file('avatar')->store('avatars', 'public');
+        $user->avatar = $path;
+        $user->save();
+    }
+    return redirect()->route('profile');
+})->middleware('auth')->name('profile.avatar');
+
 
 Route::post('/logout', function () {
     Auth::logout();
@@ -37,4 +56,9 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
+
+Route::get('/editor', function () {
+    return view('editor');
+})->middleware('auth')->name('editor');
+Route::post('/posts/store', [PostsController::class, 'store'])->middleware('auth')->name('posts.store');
 

@@ -1,4 +1,4 @@
-
+// layout.blade.php
 .p-3{
     .container {
         svg {
@@ -7,3 +7,56 @@
     }
 }    
 
+// editor.blade.php
+.vk-post-card {
+    background: #202124;
+    border: 1px solid #bdbdbd;
+    transition: box-shadow 0.3s, border-color 0.3s;
+    box-shadow: 0 1px 10px 0 rgba(0,0,0,0.25);
+}
+.vk-post-card:hover {
+    box-shadow: 0 2px 24px 0 rgba(189,189,189,0.10);
+    border-color: #e0e0e0;
+}
+.vk-profile-block {
+    background: #232526;
+    border-radius: 16px 16px 0 0;
+    border-bottom: 1px solid #bdbdbd;
+    padding: 16px 16px 8px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.vk-post-content {
+    overflow: hidden;
+    max-height: 120px;
+    position: relative;
+    transition: max-height 0.4s cubic-bezier(.4,0,.2,1);
+}
+.vk-post-content.expanded {
+    max-height: 2000px;
+    transition: max-height 0.6s cubic-bezier(.4,0,.2,1);
+}
+.vk-show-more {
+    background: none;
+    border: none;
+    color: #bdbdbd;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 4px;
+    transition: color 0.2s;
+}
+.vk-show-more:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+.vk-post-media img {
+    border: 1px solid #bdbdbd;
+    margin-bottom: 8px;
+    transition: transform 0.3s;
+}
+.vk-post-media img:hover {
+    transform: scale(1.04);
+}
