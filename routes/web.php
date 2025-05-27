@@ -62,3 +62,11 @@ Route::get('/editor', function () {
 })->middleware('auth')->name('editor');
 Route::post('/posts/store', [PostsController::class, 'store'])->middleware('auth')->name('posts.store');
 
+Route::post('/posts/{id}/like', [PostsController::class, 'like'])->middleware('auth')->name('posts.like');
+
+
+
+
+
+
+

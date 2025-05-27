@@ -42,9 +42,13 @@
                         </div>
                     @endif
                     <div class="d-flex gap-3 mt-3">
-                        <button class="btn btn-sm btn-outline-secondary px-3" disabled>
-                            <i class="bi bi-heart"></i> Нравится
-                        </button>
+                        <form method="POST" action="{{ route('posts.like', $post->id) }}">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-outline-secondary px-3">
+                                <i class="bi bi-heart{{ auth()->check() && is_array($post->liked_users) && in_array(auth()->id(), $post->liked_users) ? '-fill text-danger' : '' }}"></i>
+                                {{ $post->likes }}
+                            </button>
+                        </form>
                         <button class="btn btn-sm btn-outline-secondary px-3" disabled>
                             <i class="bi bi-chat"></i> Комментировать
                         </button>

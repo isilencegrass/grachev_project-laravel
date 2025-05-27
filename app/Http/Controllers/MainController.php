@@ -8,9 +8,17 @@ use Illuminate\Http\Request;
 class MainController extends Controller {
 
 
-    public function home()
+    public function home(Request $request)
     {
-        $posts = Posts::with('user')->latest()->paginate(10); // 10 постов на страницу
+        $query = $request->input('search');
+        $posts = \App\Models\Posts::with('user')
+            ->when($query, function($q) use ($query) {
+                $q->where('title', 'like', "%{$query}%")
+                ->orWhere('content', 'like', "%{$query}%");
+            })
+            ->latest()
+            ->paginate(10);
+
         return view('home', compact('posts'));
     }
 

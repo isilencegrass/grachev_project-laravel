@@ -32,4 +32,25 @@ class PostsController extends Controller
 
         return redirect()->back()->with('success', 'Пост успешно создан!');
     }
+
+    public function like($id)
+    {
+        $post = Posts::findOrFail($id);
+        $userId = auth()->id();
+        $likedUsers = $post->liked_users ?? [];
+
+        if (in_array($userId, $likedUsers)) {
+            $likedUsers = array_diff($likedUsers, [$userId]);
+            $post->likes = max(0, $post->likes - 1);
+        } else {
+            $likedUsers[] = $userId;
+            $post->likes++;
+        }
+
+        $post->liked_users = array_values($likedUsers); 
+        $post->save();
+
+        return back();
+    }
+
 }

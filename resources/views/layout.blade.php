@@ -6,6 +6,7 @@
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 <body class="bg-dark text-white">
     <header class="p-3 mb-3 border-bottom bg-dark text-white">
@@ -20,8 +21,8 @@
                     <li><a href="/" class="nav-link px-2 link-light">Home</a></li>
                     <li><a href="about" class="nav-link px-2 link-light">About us</a>
                 </ul>
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <input type="search" class="form-control bg-secondary text-white border-0" placeholder="Search..." aria-label="Search">
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" action="/" method="get">
+                    <input type="search" name="search" class="form-control bg-secondary text-white border-0" placeholder="Search..." aria-label="Search" value="{{ request('search') }}">
                 </form>
                 <div class="dropdown text-end">
                     @auth
