@@ -1,5 +1,6 @@
 import './bootstrap';
 
+//posts in home.blade.php, profile.blade.php
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.vk-show-more').forEach(function(btn) {
         btn.addEventListener('click', function() {
@@ -15,5 +16,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 contentBlock.querySelector('.vk-post-more').classList.remove('d-none');
             }
         });
+    });
+});
+
+
+//summernote in editor.blade.php
+document.addEventListener('DOMContentLoaded', function () {
+    $('#content').summernote({
+        placeholder: 'Введите текст поста',
+        tabsize: 2,
+        height: 250,
+        lang: 'ru-RU'
+    });
+});
+
+$(function() {
+    $('#content').summernote({
+        placeholder: 'Введите текст поста',
+        tabsize: 2,
+        height: 250,
+        lang: 'ru-RU'
     });
 });

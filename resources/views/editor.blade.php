@@ -3,6 +3,13 @@
 @section('title', 'Новая запись для ' . Auth::user()->name)
 
 @section('main_content')
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/lang/summernote-ru-RU.min.js"></script>
+
     <div class="d-flex align-items-center mb-4 mt-4">
         <div>
             @if(Auth::user()->avatar)
@@ -44,10 +51,7 @@
 
         <div class="mb-3">
             <label for="content" class="form-label">Текст поста</label>
-            <textarea name="content" id="content" rows="8" class="form-control @error('content') is-invalid @enderror" placeholder="Введите текст поста">{{ old('content') }}</textarea>
-            @error('content')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+            <textarea name="content" id="content" rows="8" class="form-control" placeholder="Введите текст поста" >{{ old('content') }}</textarea>
         </div>
 
         <div class="mb-3">
@@ -60,4 +64,5 @@
 
         <button type="submit" class="btn btn-success">Опубликовать</button>
     </form>
+    
 @endsection

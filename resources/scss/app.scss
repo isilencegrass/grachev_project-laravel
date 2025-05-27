@@ -7,7 +7,7 @@
     }
 }    
 
-// editor.blade.php
+// editor.blade.php, home.blade.php
 .vk-post-card {
     background: #202124;
     border: 1px solid #bdbdbd;
@@ -59,4 +59,95 @@
 }
 .vk-post-media img:hover {
     transform: scale(1.04);
+}
+
+//bg-color in editor
+.note-editor .note-editable {
+    background: #ffffff;
+}
+
+
+.btn-success, .btn-primary, .btn-danger, .btn-outline-secondary {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+}
+.btn-success:hover, .btn-primary:hover, .btn-danger:hover, .btn-outline-secondary:hover {
+    box-shadow: 0 4px 16px 0 rgba(189,189,189,0.15);
+    transform: translateY(-2px) scale(1.03);
+}
+
+// Аватар пользователя с тенью
+.rounded-circle {
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+    border: 2px solid #bdbdbd;
+}
+
+// Хедер с лёгким градиентом
+header.p-3 {
+    background: linear-gradient(90deg, #232526 0%, #414345 100%);
+    border-bottom: 1px solid #444;
+}
+
+// Тени для карточек постов
+.vk-post-card {
+    box-shadow: 0 2px 16px 0 rgba(50,50,50,0.18);
+    border-radius: 18px;
+}
+
+// Плавное появление карточек
+.vk-post-card {
+    opacity: 0;
+    animation: fadeInCard 0.7s forwards;
+}
+@keyframes fadeInCard {
+    to { opacity: 1; }
+}
+
+// Стилизация скроллбара
+body::-webkit-scrollbar {
+    width: 10px;
+    background: #232526;
+}
+body::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 8px;
+}
+
+// Ссылки
+a {
+    color: #90caf9;
+    transition: color 0.2s;
+    text-decoration: none;
+}
+a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+// Сообщения об ошибках и успехе
+.alert-success {
+    background: #263238;
+    color: #a5d6a7;
+    border: 1px solid #388e3c;
+}
+.alert-danger {
+    background: #2d2323;
+    color: #ef9a9a;
+    border: 1px solid #c62828;
+}
+
+// Улучшение внешнего вида формы поиска
+form[role="search"] input[type="search"] {
+    border-radius: 8px;
+    background: #232526;
+    color: #fff;
+    border: 1px solid #444;
+    transition: border 0.2s;
+}
+form[role="search"] input[type="search"]:focus {
+    border: 1.5px solid #90caf9;
+    background: #232526;
+    color: #fff;
 }

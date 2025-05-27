@@ -53,4 +53,17 @@ class PostsController extends Controller
         return back();
     }
 
+
+    public function admin()
+    {
+        $posts = \App\Models\Posts::with('user')->latest()->paginate(15);
+        return view('admin', compact('posts'));
+    }
+
+    public function destroy($id)
+    {
+        $post = \App\Models\Posts::findOrFail($id);
+        $post->delete();
+        return redirect()->route('admin')->with('success', 'Пост удалён');
+    }
 }

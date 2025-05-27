@@ -75,13 +75,13 @@
                             <h5 class="fw-semibold mb-2" style="color: #bdbdbd;">{{ $post->title }}</h5>
                             @php
                                 $plainContent = strip_tags($post->content);
-                                $shortContent = \Illuminate\Support\Str::limit($plainContent, 250);
+                                $shortContent = \Illuminate\Support\Str::limit($post->content, 250);
                                 $isLong = mb_strlen($plainContent) > 250;
                             @endphp
                             <div class="vk-post-content" id="post-content-{{ $post->id }}">
-                                {!! nl2br(e($shortContent)) !!}
+                                {!! $shortContent !!}
                                 @if($isLong)
-                                    <span class="vk-post-more d-none">{!! nl2br(e(mb_substr($plainContent, 250))) !!}</span>
+                                    <span class="vk-post-more d-none">{!! mb_substr($post->content, 250) !!}</span>
                                 @endif
                             </div>
                             @if($isLong)

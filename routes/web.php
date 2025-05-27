@@ -60,12 +60,16 @@ Route::post('/logout', function () {
 Route::get('/editor', function () {
     return view('editor');
 })->middleware('auth')->name('editor');
-Route::post('/posts/store', [PostsController::class, 'store'])->middleware('auth')->name('posts.store');
 
+Route::post('/posts/store', [PostsController::class, 'store'])->middleware('auth')->name('posts.store');
 Route::post('/posts/{id}/like', [PostsController::class, 'like'])->middleware('auth')->name('posts.like');
 
 
-
+//admin with delete posts
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin', [PostsController::class, 'admin'])->name('admin');
+    Route::delete('/admin/posts/{id}', [PostsController::class, 'destroy'])->name('admin.posts.destroy');
+});
 
 
 

@@ -10,13 +10,14 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run(): void
+    public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // n пользователей
+        \App\Models\User::factory(7)->create()->each(function ($user) {
+            // n постов для каждого пользователя
+            \App\Models\Posts::factory(6)->create([
+                'user_id' => $user->id,
+            ]);
+        });
     }
 }
