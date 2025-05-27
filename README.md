@@ -39,7 +39,7 @@
 
 1. **Клонируйте репозиторий:**
     ```sh
-    git clone <адрес-репозитория>
+    git clone git@github.com:isilencegrass/grachev_project-laravel.git
     cd grachev_project-laravel
     ```
 
