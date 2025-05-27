@@ -7,60 +7,127 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# Блог-платформа на Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Это учебный проект, реализующий блог-платформу с возможностью регистрации, публикации постов, лайков, поиска, профилей пользователей и административной панели.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Основные возможности
 
-## Learning Laravel
+- Регистрация и авторизация пользователей
+- Профиль пользователя с аватаром
+- Лента постов с лайками и просмотром медиа
+- Визуальный редактор Summernote для создания и редактирования постов
+- Загрузка изображений к постам
+- Поиск по постам и пользователям
+- Админка с возможностью удаления постов
+- Генерация тестовых пользователей и постов через сидеры
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Требования
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.1+
+- Composer
+- Node.js и npm (для сборки ассетов)
+- MySQL или другая поддерживаемая база данных
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Установка и запуск
 
-### Premium Partners
+1. **Клонируйте репозиторий:**
+    ```sh
+    git clone <адрес-репозитория>
+    cd grachev_project-laravel
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+2. **Установите зависимости:**
+    ```sh
+    composer install
+    npm install
+    ```
 
-## Contributing
+3. **Скопируйте и настройте `.env`:**
+    ```sh
+    cp .env.example .env
+    ```
+    Укажите параметры подключения к базе данных (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **Сгенерируйте ключ приложения:**
+    ```sh
+    php artisan key:generate
+    ```
 
-## Code of Conduct
+5. **Выполните миграции и сидеры:**
+    ```sh
+    php artisan migrate:fresh --seed
+    ```
+    Это создаст таблицы и добавит тестовых пользователей и посты.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6. **Соберите ассеты:**
+    ```sh
+    npm run build
+    ```
+    Для разработки используйте:
+    ```sh
+    npm run dev
+    ```
 
-## Security Vulnerabilities
+7. **Запустите локальный сервер:**
+    ```sh
+    php artisan serve
+    ```
+    Откройте [http://localhost:8000](http://localhost:8000) в браузере.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## Вход в административную панель
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. Перейдите по адресу `/admin` (например, http://localhost:8000/admin)
+2. После входа доступна возможность удаления постов.
+
+---
+
+## Генерация тестовых данных
+
+- Количество пользователей и постов настраивается в `database/seeders/DatabaseSeeder.php`.
+- Для повторной генерации выполните:
+    ```sh
+    php artisan migrate:fresh --seed
+    ```
+
+---
+
+## Основные команды
+
+- Установка зависимостей:  
+  `composer install`  
+  `npm install`
+- Миграции и сидеры:  
+  `php artisan migrate:fresh --seed`
+- Сборка ассетов:  
+  `npm run build` или `npm run dev`
+- Запуск сервера:  
+  `php artisan serve`
+
+---
+
+## Примечания
+
+- Для загрузки аватаров и изображений убедитесь, что папка `storage` доступна для записи:
+    ```sh
+    php artisan storage:link
+    ```
+- Если не отображаются иконки — проверьте подключение Bootstrap Icons в layout.
+
+---
+
+## О Laravel
+
+Laravel — это современный web-фреймворк с выразительным и элегантным синтаксисом. Он облегчает разработку, предоставляя удобные инструменты для работы с маршрутизацией, ORM, миграциями, очередями и многим другим. Подробнее: [Laravel Documentation](https://laravel.com/docs).
+
+---
+
+**Проект подготовлен для учебной и демонстрационной защиты.**
