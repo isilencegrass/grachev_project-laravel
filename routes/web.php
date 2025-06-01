@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\RegistrationController;
-use App\http\Controllers\LoginController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostsController;
 
 
